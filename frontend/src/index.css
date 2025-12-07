@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@layer base{
+  *{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+}
+@layer components{
+  .bg-wrap{
+    background-color: black;
+    min-height: 100vh;
+    min-width: 100vh;
+    color: white;
+  }
+}
