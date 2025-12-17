@@ -71,7 +71,7 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// ✅ Lấy danh sách tất cả user
+
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find().select('-password'); // ẩn password
@@ -81,7 +81,7 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-// ✅ Lấy thông tin 1 user theo ID
+
 export const getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select('-password');
@@ -119,7 +119,7 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-// ✅ Tạo mới user
+
 export const createUser = async (req, res) => {
   try {
     const { email, password, name, role } = req.body;
@@ -141,7 +141,7 @@ export const createUser = async (req, res) => {
   }
 };
 
-// ✅ Cập nhật user
+
 export const updateUser = async (req, res) => {
   try {
     const { name, role } = req.body;
@@ -159,7 +159,7 @@ export const updateUser = async (req, res) => {
   }
 };
 
-// ✅ Xóa user
+
 export const deleteUser = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);

@@ -5,10 +5,10 @@ import axiosClient from "../api/axiosClient";
 import { Link } from "react-router-dom";
 const BrowseByCategory = () => {
   const [categories, setCategories] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0); // cho cuộn ngang
+  const [currentIndex, setCurrentIndex] = useState(0); 
   const itemsPerPage = 4;
 
-  // 🔹 Gọi API
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -21,7 +21,7 @@ const BrowseByCategory = () => {
     fetchCategories();
   }, []);
 
-  // 🔹 Điều hướng trái/phải
+
   const next = () => {
     if (currentIndex + itemsPerPage < categories.length) {
       setCurrentIndex(currentIndex + itemsPerPage);
@@ -34,7 +34,7 @@ const BrowseByCategory = () => {
     }
   };
 
-  // 🔹 Cắt mảng để hiển thị phân trang
+  
   const visibleCategories = categories.slice(
     currentIndex,
     currentIndex + itemsPerPage

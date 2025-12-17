@@ -1,6 +1,6 @@
 import Game from "../models/Game.js";
 import Category from "../models/Category.js"
-// 🟢 Tạo game mới
+
 export const createGame = async (req, res) => {
   try {
     const game = new Game(req.body);
@@ -11,7 +11,7 @@ export const createGame = async (req, res) => {
   }
 };
 
-// 🔵 Lấy tất cả game (có thể lọc theo category)
+
 export const getAllGames = async (req, res) => {
   try {
     const { categories } = req.query;
@@ -30,7 +30,7 @@ export const getAllGames = async (req, res) => {
   }
 };
 
-// 🟡 Lấy game theo ID
+
 export const getGameById = async (req, res) => {
   try {
     const game = await Game.findById(req.params.id).populate("categories");
@@ -41,7 +41,7 @@ export const getGameById = async (req, res) => {
   }
 };
 
-// 🟠 Cập nhật game
+
 export const updateGame = async (req, res) => {
   try {
     const updatedGame = await Game.findByIdAndUpdate(req.params.id, req.body, {
@@ -55,7 +55,7 @@ export const updateGame = async (req, res) => {
   }
 };
 
-// 🔴 Xóa game
+
 export const deleteGame = async (req, res) => {
   try {
     const deletedGame = await Game.findByIdAndDelete(req.params.id);
