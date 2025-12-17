@@ -29,6 +29,7 @@ const CategoryManager = () => {
   };
 
   const handleDelete = async (id) => {
+    window.alert("Bạn có muốn xóa thể loại này không ?")
     await axiosClient.delete(`/categories/${id}`);
     fetchCategories();
   };
@@ -46,6 +47,11 @@ const CategoryManager = () => {
           placeholder="Tên thể loại"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          className="border p-2 rounded w-64"
+        />
+        <input
+          type="text"
+          placeholder="Mô tả"
           className="border p-2 rounded w-64"
         />
         <button

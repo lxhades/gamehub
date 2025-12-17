@@ -97,14 +97,6 @@ const UserManager = () => {
             className="border p-2 rounded"
             required
           />
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            placeholder="Mật khẩu (bỏ trống nếu không đổi)"
-            onChange={handleChange}
-            className="border p-2 rounded col-span-2"
-          />
           <select
             name="role"
             value={formData.role}

@@ -36,6 +36,13 @@ const Register = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <input
+          type="password"
+          placeholder="Nhập lại mật khẩu"
+          className="border p-2 mb-3 w-full rounded"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button
           onClick={handleRegister}
           className="bg-blue-500 hover:bg-blue-600 text-white py-2 m-2 rounded w-full"

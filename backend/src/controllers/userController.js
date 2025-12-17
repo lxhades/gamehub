@@ -2,6 +2,25 @@ import User from '../models/User.js';
 import Wallet from '../models/Wallet.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+export const getProfile = async (req, res) => {
+  try {
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: "Chưa đăng nhập" });
+    }
+
+    const user = await User.findById(req.user.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User không tồn tại" });
+    }
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Lỗi server" });
+  }
+};
+
+
 export const registerUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -36,16 +55,22 @@ export const loginUser = async (req, res) => {
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) return res.status(401).json({ message: 'Sai mật khẩu' });
 
-    // const token = jwt.sign(
-    //   { id: user._id, email: user.email },
-    //   'secretkey',
-    //   { expiresIn: '1h' }
-    // ); 
-    res.json({ message: 'Đăng nhập thành công', user });
+    const token = jwt.sign(
+      { id: user._id, email: user.email, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+
+    res.json({
+      message: 'Đăng nhập thành công',
+      token,
+      user
+    });
   } catch (error) {
     res.status(500).json({ message: 'Lỗi server', error: error.message });
   }
 };
+
 // ✅ Lấy danh sách tất cả user
 export const getAllUsers = async (req, res) => {
   try {
@@ -64,6 +89,33 @@ export const getUserById = async (req, res) => {
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+};
+export const updateProfile = async (req, res) => {
+  try {
+    const { name, avatar, dateOfBirth } = req.body;
+
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        name,
+        avatar,
+        dateOfBirth,
+      },
+      { new: true, runValidators: true }
+    ).select('-password');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User không tồn tại' });
+    }
+
+    res.json({
+      message: 'Cập nhật thành công',
+      user,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: 'Dữ liệu không hợp lệ' });
   }
 };
 

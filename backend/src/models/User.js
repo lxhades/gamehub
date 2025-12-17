@@ -10,7 +10,7 @@ const userSchema=new mongoose.Schema(
     },
         password:{
             type:String,
-            require:true,
+            required:true,
             minlength:6,
         },
         name:{
@@ -21,6 +21,13 @@ const userSchema=new mongoose.Schema(
             type:String,
             enum:['user','admin'],
             default:'user'
+        },
+        avatar:{
+            type:String,
+            default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0db5d-O0o7FdalxaxW8FImCIYJwcV3KJJVQ&s'
+        },
+        dateOfBirth:{
+            type:Date
         },    
     }
 )
