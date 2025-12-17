@@ -37,7 +37,10 @@ const Navbar = () => {
               <button onClick={() => navigate('/wallet')} className="hover:text-yellow-400">
                 Số point hiện có: <b>{wallet}</b>
               </button>
-              <span>Xin chào, {user.email}</span>
+              <button onClick={() => navigate('/tkcanhan')} className="hover:text-yellow-400">
+                <span>Xin chào, {user.email}</span>
+              </button>
+            
               <button
                 onClick={() => {
                   localStorage.removeItem('user');
